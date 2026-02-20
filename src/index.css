@@ -1,0 +1,258 @@
+/* ============================================================
+   Swiss Re Design System – Tic Tac Toe
+   Based on swissre.com visual language
+   ============================================================ */
+
+/* --- Design Tokens --- */
+:root {
+  /* Primary – "Lake" pine-green */
+  --sr-lake: #006e73;
+  --sr-lake-dark: #004f54;
+  --sr-lake-light: #e5f2f3;
+
+  /* Neutral */
+  --sr-bright-gray: #3c4150;
+  --sr-gray-600: #6b7280;
+  --sr-gray-200: #e5e7eb;
+  --sr-gray-100: #f3f4f6;
+  --sr-white: #ffffff;
+
+  /* Functional */
+  --sr-success: #006e73;
+  --sr-draw: #6b7280;
+
+  /* Typography */
+  --sr-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Spacing */
+  --sr-space-xs: 4px;
+  --sr-space-sm: 8px;
+  --sr-space-md: 16px;
+  --sr-space-lg: 24px;
+  --sr-space-xl: 32px;
+  --sr-space-2xl: 48px;
+
+  /* Borders & Radii */
+  --sr-radius: 4px;
+  --sr-border: 1px solid var(--sr-gray-200);
+}
+
+/* --- Reset / Base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--sr-font);
+  color: var(--sr-bright-gray);
+  background-color: var(--sr-gray-100);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Header --- */
+.sr-header {
+  background-color: var(--sr-lake);
+  color: var(--sr-white);
+  padding: var(--sr-space-md) var(--sr-space-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--sr-space-md);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sr-header__logo {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.sr-header__divider {
+  width: 1px;
+  height: 24px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.sr-header__title {
+  font-size: 16px;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+/* --- Main layout --- */
+.sr-main {
+  max-width: 480px;
+  margin: var(--sr-space-2xl) auto;
+  padding: 0 var(--sr-space-md);
+}
+
+/* --- Card --- */
+.sr-card {
+  background-color: var(--sr-white);
+  border: var(--sr-border);
+  border-radius: var(--sr-radius);
+  padding: var(--sr-space-xl);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/* --- Status --- */
+.sr-status {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--sr-bright-gray);
+  margin-bottom: var(--sr-space-lg);
+  min-height: 28px;
+}
+
+.sr-status--winner {
+  color: var(--sr-lake);
+}
+
+.sr-status--draw {
+  color: var(--sr-draw);
+}
+
+/* --- Board --- */
+.sr-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 2px solid var(--sr-lake);
+  border-radius: var(--sr-radius);
+  overflow: hidden;
+  margin-bottom: var(--sr-space-lg);
+}
+
+/* --- Cell / Square --- */
+.sr-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: var(--sr-white);
+  border: none;
+  border-right: 1px solid var(--sr-gray-200);
+  border-bottom: 1px solid var(--sr-gray-200);
+  color: var(--sr-bright-gray);
+  transition: background-color 0.15s ease, color 0.15s ease;
+  font-family: var(--sr-font);
+}
+
+.sr-cell:nth-child(3n) {
+  border-right: none;
+}
+
+.sr-cell:nth-child(n + 7) {
+  border-bottom: none;
+}
+
+.sr-cell:hover:not(:disabled) {
+  background-color: var(--sr-lake-light);
+}
+
+.sr-cell:focus-visible {
+  outline: 2px solid var(--sr-lake);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.sr-cell:disabled {
+  cursor: default;
+}
+
+.sr-cell--x {
+  color: var(--sr-lake);
+}
+
+.sr-cell--o {
+  color: var(--sr-bright-gray);
+}
+
+.sr-cell--winning {
+  background-color: var(--sr-lake-light);
+  color: var(--sr-lake-dark);
+}
+
+/* --- Button --- */
+.sr-button {
+  display: block;
+  width: 100%;
+  padding: var(--sr-space-sm) var(--sr-space-lg);
+  font-family: var(--sr-font);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--sr-white);
+  background-color: var(--sr-lake);
+  border: 2px solid var(--sr-lake);
+  border-radius: var(--sr-radius);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.sr-button:hover {
+  background-color: var(--sr-lake-dark);
+  border-color: var(--sr-lake-dark);
+}
+
+.sr-button:focus-visible {
+  outline: 2px solid var(--sr-lake-dark);
+  outline-offset: 2px;
+}
+
+.sr-button:active {
+  background-color: #003b3f;
+  border-color: #003b3f;
+}
+
+/* --- Score board --- */
+.sr-scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: var(--sr-space-xl);
+  margin-bottom: var(--sr-space-lg);
+  padding: var(--sr-space-md);
+  background-color: var(--sr-gray-100);
+  border-radius: var(--sr-radius);
+}
+
+.sr-scoreboard__item {
+  text-align: center;
+}
+
+.sr-scoreboard__label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--sr-gray-600);
+  margin-bottom: var(--sr-space-xs);
+}
+
+.sr-scoreboard__value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--sr-bright-gray);
+}
+
+.sr-scoreboard__value--x {
+  color: var(--sr-lake);
+}
+
+/* --- Footer --- */
+.sr-footer {
+  text-align: center;
+  padding: var(--sr-space-lg);
+  font-size: 12px;
+  color: var(--sr-gray-600);
+}
